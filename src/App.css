@@ -9,3 +9,11 @@
   margin-bottom: 50px;
   box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.5);
 }
+.link{
+font-style: italic;
+text-decoration: none;
+color: #179479
+}
+.link:hover{
+  color:black;
+}

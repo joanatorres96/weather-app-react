@@ -33,3 +33,14 @@ list-style: none;
 .loader{
     width: 500px;
 }
+#link{
+  text-decoration: none;
+ color: #179479;  
+}
+#temp{
+    font-size: 40px;
+    font-weight:400;
+}
+#units{
+    margin-top: 0;
+}
