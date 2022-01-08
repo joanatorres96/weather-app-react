@@ -1,9 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import ReactAnimatedWeather from 'react-animated-weather';
+import LoadingIcons from 'react-loading-icons';
 import "./Weather.css";
 
 export default function Weather(){
+    let [weatherInfo, setWeatherInfo] = useState({ ready:false});
+    let[city,setCity]= useState("Lisbon");
+    
+
+function weatherResponse(response){
+    console.log(response.data);
+    setCity(response.data.name);
+   setWeatherInfo({
+       ready: true,
+       temperature: Math.round(response.data.main.temp),
+       description: response.data.weather[0].description,
+       humidity: Math.round(response.data.main.humidity),
+       windSpeed: (response.data.wind.speed),
+   })}
+////////////////////////////////////////////////////////////////////////////
+
+    if(weatherInfo.ready){
 return(
 <div className="Weather">
 <div className="Form">
@@ -24,8 +42,8 @@ return(
    <h2 className="mt-5">Thursday 20:00</h2> 
 <div className="row mt-5 mb-4">
 <div className="col-sm-5 text-end mt-3">
-    <h2>City Name 12º C</h2>
-    <h4>Cloudy</h4>
+    <h2>{`${city} ${weatherInfo.temperature}ºC`}</h2>
+    <h4 className="text-capitalize">{`${weatherInfo.description}`}</h4>
     </div>
 <div className="col-sm-2 text-center"> 
       <ReactAnimatedWeather
@@ -37,9 +55,8 @@ return(
      </div>
 <div className="col-sm-5 mt-3" >
     <ul>
-        <li className="weather-info">Percipitation: 50%</li>
-        <li className="weather-info">Humidity: 70%</li>
-        <li className="weather-info">Wind: 3 Km/h</li>
+        <li className="weather-info">{`Humidity: ${weatherInfo.humidity}%`}</li>
+        <li className="weather-info">{`Wind: ${weatherInfo.windSpeed}Km/h`}</li>
     </ul>
 </div>
     
@@ -55,15 +72,22 @@ return(
 <div className="col-sm-2"> <ul> <li className="forecast-info">Day</li><li className="forecast-info">☀️</li><li className="forecast-info">15º/12º</li></ul></div>
 <div className="col-sm-2"> <ul> <li className="forecast-info">Day</li><li className="forecast-info">☀️</li><li className="forecast-info">15º/12º</li></ul></div>
 </div>
-
-
  </div>
-
-
 </div>
-
-
-
-
 );
+}else{
+    let city= "Lisbon";
+    let apiKey= "bfe2f28f38a462ece1d27d383dea4139";
+    let unit= "metric";
+    let apiUrl= `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
+    axios.get(apiUrl).then(weatherResponse);
+
+    return(
+        <div className=" text-center m-5">
+        <LoadingIcons.TailSpin stroke="#179479" className="loader" />
+        <br /><br />
+        Loading...
+        </div>
+        );
+       }
 }

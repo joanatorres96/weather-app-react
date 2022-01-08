@@ -30,3 +30,6 @@ list-style: none;
     list-style: none;
     text-align: center;
 }
+.loader{
+    width: 500px;
+}
