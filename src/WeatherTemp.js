@@ -17,7 +17,7 @@ export default function WeatherTemp(props){
     if (unit === "Fahrenheit"){
       return(
         <div className="WeatherTemp">
-        <span className="temperature">{fahrenheit}</span>
+        <span className="temperature" id="temp">{fahrenheit}</span>
         <span className="unit" id="units"><a href="/" onClick={showCelsius} id="link">ºC</a> | ºF</span>
        </div> 
    
