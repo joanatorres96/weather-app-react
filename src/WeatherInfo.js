@@ -16,7 +16,7 @@ return(
     
    </div>
    <div className="col-sm-1 p-0 mt-3 text-center"> 
-     <Icon icon={props.info.icon} />
+     <Icon icon={props.info.icon} size={80} />
      </div>
 
 <div className="col-sm-3 p-0 mt-3 ms-1 text-start " id="details" >       

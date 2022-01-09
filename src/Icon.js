@@ -23,13 +23,14 @@ export default function Icon(props){
         "50d":"FOG",
         "50n":"FOG",
        };
-    let iconCode= iconCodes[props.icon];
+    let iconCode= iconCodes[props.icon]; 
+    let iconSize= props.size;
    return(
        <div>
     <ReactAnimatedWeather
     icon={iconCode}
     color={"BLACK"}
-    size={80}
+    size={iconSize}
     animate={true}
     />
     </div>);

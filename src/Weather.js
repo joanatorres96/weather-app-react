@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import LoadingIcons from 'react-loading-icons';
 import "./Weather.css";
+import Forecast from "./Forecast"
 import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props){
@@ -19,10 +20,12 @@ function weatherResponse(response){
        humidity: Math.round(response.data.main.humidity),
        windSpeed: (response.data.wind.speed),
        icon: response.data.weather[0].icon,
+       lat: response.data.coord.lat,
+       lon: response.data.coord.lon,
    })}
 
    function searchData(){
-    let apiKey= "bfe2f28f38a462ece1d27d383dea4139";
+    let apiKey= "9b6319aa2aea8b77048b5f6158d3cba8";
     let unit= "metric";
     let apiUrl= `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
     axios.get(apiUrl).then(weatherResponse);
@@ -52,6 +55,7 @@ return(
 </div>
 </form>
 <WeatherInfo info={weatherInfo}/>
+<Forecast coords={weatherInfo}/>
 </div>
 );
 }else{
