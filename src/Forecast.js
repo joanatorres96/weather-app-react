@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Forecast.css"
 import DailyForecast from "./DailyForecast";
@@ -8,10 +8,14 @@ export default function Forecast (props){
     let [forecastLoaded, setForecastLoaded] = useState(false);
     let [forecastData, setForecastData] = useState("");
 
+    useEffect(() => {
+      setForecastLoaded(false);
+    }, [props.coords]);
+
     function forecastResponse(response){
         console.log(response.data);
-        setForecastLoaded(true);
         setForecastData(response.data.daily);
+        setForecastLoaded(true);
     }
 
   if(forecastLoaded){
@@ -25,7 +29,10 @@ export default function Forecast (props){
   <div className="col-sm" key={index}>
    <DailyForecast data={forecastDay} />
  </div> 
-    );}})}
+    );}
+    else{
+      return null;
+    }})}
     </div>
     </div>
     );

@@ -12,7 +12,6 @@ export default function Weather(props){
 function weatherResponse(response){
     console.log(response.data);
    setWeatherInfo({
-       ready: true,
        date: new Date(response.data.dt*1000),
        city: response.data.name,
        temperature: Math.round(response.data.main.temp),
@@ -22,6 +21,8 @@ function weatherResponse(response){
        icon: response.data.weather[0].icon,
        lat: response.data.coord.lat,
        lon: response.data.coord.lon,
+       coords:response.data.coord,
+       ready: true,
    })}
 
    function searchData(){
